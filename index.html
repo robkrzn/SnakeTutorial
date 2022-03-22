@@ -193,8 +193,20 @@
         }
     }
     function resetFood() {
+        //GameOver
+        if(snakeLenght == titleCountX * titleCountY){
+            gameOver();
+        }
+
         foodPosX = Math.floor(Math.random() * titleCountX) * tileSize;
         foodPosY = Math.floor(Math.random() * titleCountY) * tileSize;
+
+        if(foodPosX == snakePosX && foodPosY == snakePosY){
+            resetFood()
+        }
+        if(tail.some(snake => snake.x == foodPosX && snake.y == foodPosY)){
+            resetFood();
+        }
     }
     function gameOver(){
         gameIsRunning = false;
